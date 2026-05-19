@@ -1,0 +1,94 @@
+Write a python program for the bank Account details:
+
+create a user-defined exception, 
+
+initial balance is "5000" in the Account 
+
+user can able to do the following operations: 
+
+1) deposit ( minimum is  5000, maximum is 100000) 
+
+2) withdraw( maximum is 50000) 
+
+if we deposit less than "5000", then we will raise "an exception called 
+
+"InvalidDepositAmountError" 
+
+if we withdraw more than actual balance, then we will raise exception 
+
+called "InsuffcientBalenceError" 
+
+if we given  any negative amount for deposit or withdraw, we will 
+
+get exception called "AmountNegativeError"  
+
+if we try to deposit more than maximum limit , then we will raise  an 
+
+exception called "MaxmiumDepositAmountError" 
+
+create the all use defined exceptions for the class called "Account"
+
+code
+======
+
+
+
+
+class InvaildDepositAmountError(Exception):
+    pass
+class InsuffcientBalenceError(Exception):
+    pass
+class AmountNegativeError(Exception):
+    pass
+class MaximumDepositeAmountError(Exception):
+    pass
+class  MaximumWithdrawAmountError(Exception):
+    pass
+def account():
+    def __init__(self):
+        self.amount=5000
+    def deposit(self):
+        try:
+            amount=int(input("amount:"))
+            if amount<0:
+                raise AmountNegativeError
+            elif amount>0 and amount<5000:
+                raise InvaildDepositAmountError
+            elif amount>100000:
+                raise MaximumDepositeAmountError
+        except AmountNegativeError:
+            print("Amount should be not in Negative")
+            self.deposit()
+        except InvaildDepositAmountError:
+            print("the amount shold be greather than 5000")
+            self.deposit()
+        except MaximumDepositeAmountError:
+            print("the amount is maximum deposit is 100000")
+            self.deposit()
+        else:
+            self.amount+=amount
+            print(self.amount)
+    def withdraw(self):
+        try:
+            amount=int(input("amount"))
+            if amount<0:
+                raise AmountNegativeError
+            elif amount>self.amount:
+                raise InsuffcientBalenceError
+            elif amount>50000:
+                raise MaximumWithdrawAmountError
+        except AmountNegativeError:
+            print("the Amount should not be negative")
+            self.withdraw()
+        except InsuffcientBalenceError:
+            print("The amount is insuffcient amount")
+            self.withdraw()
+        except MaximumWithdrawAmountError:
+            print("the maximum amount withdraw is less than 50000")
+            self.withdraw()
+        else:
+            self.amount-=amount
+            print(self.amount)
+a1=account()
+a1.deposit()
+a1.withdraw()
